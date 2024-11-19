@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p></p>
+
+    <script>
+
+        const person = {Firstname:"Emmanuel", Lastname:"Adewumi", age:800, Fullname:function(){return (this.Firstname + " " + this.Lastname).toUpperCase()}}
+        console.log(person.Firstname)
+        console.log(person.Fullname())
+        person.othername = 'Darasimi'
+        delete person.Lastname
+
+        const Salary = {}
+        //Creating Keys and Values
+        Salary.basicSalary = 65000
+        Salary.grossSalary = 6500
+        Salary.netSalary = 65000 * 12
+        console.log(Salary.netSalary)
+
+        //Changing Firstname
+        const X = person
+        X.Firstname = "Darasimi"
+        console.log(person.Firstname + " is " + person.age + " and his full name is " + person.Fullname() +" and his other name is " + person.othername)
+
+        // A simpler way is using template literals
+        //Syntax `${object or whatever}`
+        // console.log(`${person.Firstname} is ${person.age} years and his full name is ${person.Fullname()}`)
+
+        //Darasimi is 800 years and his full name is Darasimi Adewumi
+
+        //NESTED OBJECTS
+        const personDetails = {Name:'John', Age:25, Cars:{Car1:'Benz', Car2:'Lexus', Car3:'Tesla'}};
+        console.log(`my name is ${personDetails.Name} and I am ${personDetails.Age} years old and my cars are ${personDetails.Cars['Car1']}, ${personDetails['Cars']["Car2"]} and ${personDetails.Cars.Car3}`)
+        //LOOP EXAMPLE
+        let cars = ''
+        for(let car in personDetails.Cars){
+            cars = cars + personDetails.Cars[car] + ' ';
+        }
+        console.log(cars)  
+
+        let car = "Benz"
+        let textlength = car.slice(1, 4)
+        let textlength2 = car.substring(1, 4)
+        console.log(textlength2)
+    </script>
+</body>
+</html>

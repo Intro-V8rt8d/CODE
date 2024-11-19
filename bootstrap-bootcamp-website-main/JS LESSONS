@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="LOGIN.css">
+    <title>Document</title>
+</head>
+<body>
+    <section class="bg-dark p-5 p-md-3" style="height: 100vh; font-family: 'Courier New', Courier, monospace;">
+        <div class="container" style="height: 100%;">
+
+            <!-- top -->
+            <div class="top d-flex justify-content-between">
+                <a href="#" class="btn btn-light"><i class="bi bi-arrow-bar-left"></i>BACK</a>
+                <a href="SIGNUP.html" class="btn btn-outline-light">SIGN UP</a>
+            </div>
+
+            <!-- mid -->
+            <div class="mid">
+                <p class="h3-md text-light text-center">ENTER YOUR DETAILS:</p>
+                <div class="inputs d-flex flex-column align-items-center justify-content-center">
+                    <div class="input-group mb-3" style=" width: 75%;">
+                        <span class="input-group-text">@</span>
+                        <div class="form-floating">
+                          <input type="text" class="form-control" id="usernameInput" placeholder="Username">
+                          <label for="usernameInput">Username</label>
+                        </div>
+                    </div>
+    
+                    <div class="input-group mb-3" style=" width: 75%;">
+                        <span class="input-group-text">@</span>
+                        <div class="form-floating">
+                          <input type="password" class="form-control" id="passwordInput" placeholder="Password">
+                          <label for="passwordInput">Password</label>
+                        </div>
+                    </div>
+                    
+                    <!-- Error message container -->
+                    <p id="errorMessage" class="text-danger" style="display: none;">Invalid username or password!</p>
+
+                    <a href="#" class="btn btn-light" onclick="validateInput()">LOGIN</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        function validateInput() {
+            // Get the input values
+            var username = document.getElementById('usernameInput').value;
+            var password = document.getElementById('passwordInput').value;
+            var errorMessage = document.getElementById('errorMessage');
+
+            // Example condition: Check if the username and password are not empty
+            if (username === "" || password === "") {
+                errorMessage.style.display = "block";  // Show the error message
+            } else {
+                errorMessage.style.display = "none";   // Hide the error message
+                // Proceed with login (you can add more logic here)
+                alert("Login successful!");
+            }
+        }
+    </script>
+
+</body>
+</html>
+
+Key Changes:
+Error Message: Added a paragraph with id="errorMessage" to show the error message when validation fails.
+JavaScript Validation:
+The validateInput() function checks if the username or password is empty.
+If either is empty, it displays the error message.
+If both fields are filled, the error message is hidden, and you can proceed with the login process (currently, it shows a "Login successful!" alert).
+Button Behavior: The LOGIN button now has an onclick="validateInput()" event to trigger the validation.
+
+Yes, in JavaScript, when you want an event (like clicking a button) to trigger a function, you need to mention the function name in the onclick
+ attribute of the button. This tells the browser what function to execute when the event happens.
+
+For example, in your code:
+
+HTML
+<a href="#" class="btn btn-light" onclick="validateInput()">LOGIN</a>
+Here, onclick="validateInput()" means that when the "LOGIN" button is clicked, the validateInput() function will be called. This function will
+ then run the JavaScript code inside it, checking the input values and either showing an error or allowing further actions.
+
+So yes, you always need to reference the function name in the onclick or other event attributes like onchange, onmouseover, etc., 
+to trigger the specific function. If you have multiple buttons or triggers, you can attach different functions to each event.
+
+// Optionally clear the error message after 2 seconds (2000 milliseconds)
+    setTimeout(() => {
+      error.style.display = "none"; // Hide the error message again
+    }, 2000); // Adjust time as needed
+
+    setTimeout() is a JavaScript function that allows you to delay the execution of a particular block of code (a function) by a specified amount of time. After the delay, the specified function runs.
+
+Syntax:
+javascript
+setTimeout(function, delay);
+function: The code or function you want to execute after the delay.
+delay: The time in milliseconds to wait before executing the code. For example, 1000 milliseconds equals 1 second.
+
+var: Can be used anywhere in the function and gets hoisted but shows undefined before the assignment.
+
+let: Only works within its block and throws an error if used before being declared.
+
+
+//JSON ARRAYS
+A JSON array is a data structure in JavaScript Object Notation (JSON) that holds an ordered list of values. JSON arrays are a way to store multiple pieces of data together in a single variable. They are often used to represent lists of items, such as a collection of objects or a simple list of numbers, strings, or other data types.
+
+Structure of a JSON Array
+A JSON array is represented using square brackets [] and can contain:
+
+Strings (e.g., "apple")
+Numbers (e.g., 42)
+Booleans (e.g., true or false)
+Objects (e.g., { "name": "Alice" })
+Other arrays (nested arrays)
+Here’s a basic example of a JSON array containing different data types:
+
+
+[
+    "apple",
+    42,
+    true,
+    { "name": "Alice", "age": 25 },
+    ["nested", "array"]
+]
+JSON Array of Objects
+A common use case is an array of objects. For example, you might want to store a list of user profiles, where each user is represented as an object:
+
+
+[
+    { "name": "Alice", "age": 25, "city": "New York" },
+    { "name": "Bob", "age": 30, "city": "Chicago" },
+    { "name": "Charlie", "age": 22, "city": "San Francisco" }
+]
+In this JSON array:
+
+Each element is an object.
+Each object has the same set of properties (name, age, city).
+Accessing JSON Arrays in JavaScript
+When working with JSON arrays in JavaScript, you’ll often parse the JSON data and access the elements using dot notation or bracket notation.
+
+Parsing JSON Strings into JavaScript Arrays:
+
+If you have a JSON array as a string, you can use JSON.parse() to convert it into a JavaScript array:
+javascript
+Copy code
+const jsonString = '[{"name": "Alice", "age": 25}, {"name": "Bob", "age": 30}]';
+const users = JSON.parse(jsonString);
+console.log(users);
+Accessing Elements:
+
+You can access elements of the parsed JSON array like any JavaScript array:
+javascript
+Copy code
+console.log(users[0].name); // Output: "Alice"
+console.log(users[1].age);  // Output: 30
+Iterating Over JSON Arrays:
+
+Use loops like for, forEach, or for...of to iterate over the array:
+users.forEach(user => {
+    console.log(`${user.name} is ${user.age} years old.`);
+});
+
+// Output:
+// "Alice is 25 years old."
+// "Bob is 30 years old."
+Modifying JSON Arrays in JavaScript
+You can manipulate JSON arrays like any other JavaScript array:
+
+Adding Elements:
+
+
+users.push({ "name": "Charlie", "age": 22, "city": "San Francisco" });
+console.log(users);
+Updating Elements:
+
+
+users[0].city = "Los Angeles";
+console.log(users[0]); // Output: { "name": "Alice", "age": 25, "city": "Los Angeles" }
+Removing Elements:
+
+Remove the last element with pop():
+javascript
+Copy code
+users.pop();
+Remove an element by index using splice():
+javascript
+Copy code
+users.splice(1, 1); // Removes the second user (index 1)
+Converting JavaScript Arrays to JSON Strings
+To send data back to a server or store it as a JSON string, you can use JSON.stringify():
+
+const jsonString = JSON.stringify(users);
+console.log(jsonString);
+// Output: '[{"name":"Alice","age":25,"city":"Los Angeles"},{"name":"Bob","age":30}]'
+Example: Using a JSON Array for an API Response
+JSON arrays are often returned by APIs when multiple items need to be sent in a single response. Here's an example:
+
+
+{
+    "status": "success",
+    "data": [
+        { "id": 1, "product": "Laptop", "price": 1200 },
+        { "id": 2, "product": "Smartphone", "price": 800 },
+        { "id": 3, "product": "Tablet", "price": 600 }
+    ]
+}
+In this case:
+
+data is a JSON array containing objects, where each object represents a product.
+To access the price of the second product in JavaScript, you would do:
+
+const response = JSON.parse(apiResponse); // `apiResponse` is a JSON string
+console.log(response.data[1].price); // Output: 800
+
+Summary
+JSON arrays are a way to store multiple values in an ordered list, making them ideal for lists of data.
+They are easy to parse into JavaScript objects and arrays, allowing you to access, modify, and iterate over the data.
+They are frequently used in APIs to send multiple records or objects in a single response.
+JSON arrays provide a simple, flexible way to work with data structures, making them a core part of modern web development. If you need more examples or further explanation, let me know!
+
+
+//JS CLASSES
+
+What is a Class?
+Think of a class like a blueprint for making things.
+Imagine you want to create multiple cars. Each car has a model, color, and can drive.
+Instead of writing out all the details for each car separately, you can create a class called Car that has the common details, and then make cars using this blueprint.
+
+Example of a Simple Class
+class Car {
+    constructor(model, color) {
+        this.model = model; // This is like giving each car its own model
+        this.color = color; // And each car its own color
+    }
+
+    drive() {
+        return `The ${this.color} ${this.model} is driving.`;
+    }
+}
+
+// Now let's make a new car using this blueprint
+const myCar = new Car('Toyota', 'red');
+console.log(myCar.drive()); // Output: "The red Toyota is driving."
+
+What’s Happening Here?
+class Car { ... }: Defines a blueprint called Car.
+constructor(model, color): Sets up new cars with a model and color.
+this.model and this.color: Means each car has its own unique model and color.
+drive(): A function (method) inside the class that tells what happens when the car drives.
+Making More Cars
+
+const car1 = new Car('Honda', 'blue');
+const car2 = new Car('Ford', 'green');
+
+console.log(car1.drive()); // Output: "The blue Honda is driving."
+console.log(car2.drive()); // Output: "The green Ford is driving."
+
+We made two new cars, car1 and car2, using the Car class. Each car can drive with its own model and color.
+Summary in a Nutshell
+A class is like a recipe for making objects (like cars).
+constructor sets up each new object with specific values.
+this helps each object have its own details.
+Methods (like drive()) are actions that each object can perform.
+Classes make it easy to create lots of similar objects without repeating code! Is that clearer? 😊
+
+
+The replaceAll() method in JavaScript is used to replace all occurrences of a specified value in a string with another value. It’s similar to replace(), but while replace() only replaces the first occurrence, replaceAll() replaces every occurrence.
+
+Syntax
+string.replaceAll(searchValue, replaceValue);
+string: The original string you want to modify.
+searchValue: The text or pattern you want to find in the string.
+replaceValue: The text you want to use as the replacement.
+
+Example 1: Replacing All Occurrences of a Word
+const text = "I love cats. Cats are amazing pets.";
+const newText = text.replaceAll("Cats", "Dogs");
+console.log(newText); 
+// Output: "I love cats. Dogs are amazing pets."
+In this example, replaceAll() changes all occurrences of "Cats" to "Dogs".
+Note that it doesn't change "cats" (lowercase) because replaceAll() is case-sensitive by default.
+
+Example 2: Case-Insensitive Replacement Using Regular Expressions
+If you want to replace text regardless of case (e.g., "cat" and "Cat"), you can use a regular expression with the g (global) and i (case-insensitive) flags:
+const text = "I love cats. Cats are amazing pets.";
+const newText = text.replaceAll(/cats/gi, "dogs");
+console.log(newText); 
+// Output: "I love dogs. dogs are amazing pets."
+Here, /cats/gi is a regular expression that matches "cats" in any case throughout the entire string.
+
+Example 3: Replacing Special Characters
+You can also use replaceAll() to remove or replace special characters in a string:
+const text = "Hello! How are you? I'm fine!";
+const cleanedText = text.replaceAll("!", "");
+console.log(cleanedText);
+// Output: "Hello How are you? I'm fine"
+This example removes all exclamation marks ! by replacing them with an empty string "".
+When to Use replaceAll() vs replace()
+Use replace() if you only need to replace the first occurrence of a pattern.
+Use replaceAll() if you want to replace every occurrence of a pattern.
+
+Summary
+replaceAll() is great for changing multiple occurrences of a word or pattern in a string.
+It’s case-sensitive by default but can be used with a case-insensitive regular expression.
+It’s a convenient way to clean up or modify strings without needing a loop.
+replaceAll() makes it easy to handle repetitive replacements in strings! Let me know if you want to see more examples or have any other questions.
+
+
+
+The split() method in JavaScript is used to break up a string into smaller pieces based on a separator you specify. It then returns those pieces as an array.
+
+How It Works
+Think of split() like a scissors that cuts up your string wherever you tell it to.
+You give it a separator (a character or word where it should cut the string).
+Syntax
+javascript
+Copy code
+string.split(separator);
+string: The string you want to split.
+separator: What character or word you want to use to cut up the string.
+Example 1: Splitting by a Space
+javascript
+Copy code
+const text = "I love JavaScript";
+const words = text.split(" ");
+console.log(words); 
+// Output: ["I", "love", "JavaScript"]
+Here, the space (" ") is used as the separator.
+It splits the sentence into words wherever there is a space.
+Example 2: Splitting by a Comma
+javascript
+Copy code
+const fruits = "apple,banana,cherry";
+const fruitArray = fruits.split(",");
+console.log(fruitArray); 
+// Output: ["apple", "banana", "cherry"]
+The comma (",") is the separator.
+It splits the string into an array of fruit names.
+Example 3: Splitting Each Character
+If you want to break up a string into individual characters, you can use an empty string ("") as the separator:
+
+javascript
+Copy code
+const word = "hello";
+const letters = word.split("");
+console.log(letters);
+// Output: ["h", "e", "l", "l", "o"]
+Here, it splits every character in the word "hello" into its own piece.
+Example 4: Limiting the Number of Splits
+You can also specify how many pieces you want by adding a second parameter:
+
+javascript
+Copy code
+const text = "red,green,blue,yellow";
+const colors = text.split(",", 2);
+console.log(colors); 
+// Output: ["red", "green"]
+, 2 means "only give me the first 2 pieces".
+It splits the string at commas but stops after the second one.
+Summary
+split() breaks a string into an array based on a separator.
+Common separators include spaces (" "), commas (","), or even empty strings ("").
+It helps turn long strings into lists of smaller parts that are easier to work with.
+It’s a handy tool when you need to break down a string! Let me know if this makes sense or if you have more questions! 😊
+
+
+JS LOOPS
+//The For Loop
+The for statement creates a loop with 3 optional expressions:
+
+for (expression 1; expression 2; expression 3) {
+  // code block to be executed
+}
+
+Expression 1 is executed (one time) before the execution of the code block.
+
+Expression 2 defines the condition for executing the code block.
+
+Expression 3 is executed (every time) after the code block has been executed.

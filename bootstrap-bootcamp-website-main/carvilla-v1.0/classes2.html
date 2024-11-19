@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+        //Assignment
+        class Person {
+            constructor(firstName = 'John', lastName = 'Doe', Age = 18){
+                this.firstName = firstName
+                this.lastName = lastName
+                this.Age = Age
+            };
+
+            yearUntilRetirement(){
+                const retirementAge = 65;
+                const retired = 0
+                if (this.Age >= 65) {
+                    console.log(`First Name: ${this.firstName} \nLast Name: ${this.lastName} \nAge: ${this.Age} \nYears Until Retirement: ${retired}`);
+
+                }
+                else {
+                    console.log(`First Name: ${this.firstName} \nLast Name: ${this.lastName} \nAge: ${this.Age} \nYears Until Retirement: ${retirementAge - this.Age}`);
+                }
+            };
+
+         }
+
+         const Person1 = new Person()
+         Person1.yearUntilRetirement();
+
+         const Person2 = new Person('Alice', 'Smith', 28)
+         Person2.yearUntilRetirement();
+
+         const Person3 = new Person('Bob', 'Johnson', 70)
+         Person3.yearUntilRetirement();
+
+
+         //INHERITANCE
+         class People {
+            constructor(name, age){
+                this.name = name;
+                this.age = age;
+            }
+
+            peopleInfo(){
+                console.log(`My name is ${this.name} and my age is ${this.age}`)
+            }
+         } //(Parent Class)
+
+         class Employee extends People {
+            constructor(name, age, jobTitle){
+                super(name, age)
+                this.jobTitle = jobTitle
+            }
+
+            Display(){
+                console.log(`My name is ${this.name} and my age is ${this.age} and I am a ${this.jobTitle}`)
+            }
+         } //(Child Class)
+
+         const Employ = new Employee('John', 20, 'Web Developer')
+         Employ.peopleInfo();
+         Employ.Display();
+
+         //METHOD OVERRIDING
+         class Animal {
+            constructor(name){
+                this.name = name;
+            }
+
+            sound(){
+                console.log(`${this.name} makes a sound`)
+            }
+         }
+
+        //  const ThorFinn = new Animal('Thorfinn')
+        //  ThorFinn.sound()
+
+         class Dog extends Animal {    
+            constructor(name, breed){
+                super(name)
+                this.breed = breed;
+            }
+
+            sound(){
+                console.log(`${this.name} ${this.breed} barks`)
+            }
+         }
+
+         const ThorFinn = new Dog('Thorfinn', 'Chihuahua')
+         ThorFinn.sound()
+    </script>
+</body>
+</html>

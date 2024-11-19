@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <div>
+            <span>FirstName:</span>
+            <span id="Fname"></span>
+        </div>
+        <div>
+            <span>LastName:</span>
+            <span id="Lname"></span>
+        </div>
+        <div>
+            <span>Email:</span>
+            <span id="Email"></span>
+        </div>
+
+        <a onclick="Logout()" class="btn btn-dark">LogOut</a>
+        </div>
+
+        <script>
+            const token = localStorage.getItem("token")
+            if (!token){
+                location = "LOGIN.html"
+            }
+            else{
+            var firstname = localStorage.getItem("FName")
+            var lastname = localStorage.getItem("LName")
+            var Email = localStorage.getItem("Email")
+
+            document.getElementById('Fname').innerHTML = firstname
+            document.getElementById('Lname').innerHTML = lastname
+            document.getElementById('Email').innerHTML = Email
+            }
+
+            function Logout(){
+                localStorage.removeItem("token")
+                alert("Logout Successful")
+                location = "LOGIN.html"
+            }
+        </script>
+</body>
+</html>

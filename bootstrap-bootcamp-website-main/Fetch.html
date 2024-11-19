@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+
+        //Destructuring, Adding new value, Alias
+        const Person = {firstName:"John", lastName:"Doe", Age:50}
+        let {firstName, lastName:Last, Country = "Nigeria"} = Person;
+        console.log(firstName)
+        console.log(Country)
+        console.log(Last)
+
+        //Rest
+        const myArray = [12,15,30,25,40]
+        const [a,b,c,...rest] = myArray
+        console.log(c)
+
+        //Arrow Function
+        function Hello(){
+            console.log('Hello World')
+        }
+        Hello()
+
+        let hello = ''
+        hello = function(){
+            console.log('Hello World')
+        }
+        hello()
+
+        let World = ''
+        World = () =>{
+            console.log('Hello USA')
+        }
+        World()
+
+        let world = ''
+        world = () => console.log('Hello USA')
+        world()
+
+        let Word = ''
+        Word = (name, Country) => console.log('Hello ' + name + " from " + Country)
+        Word('Victor','USA')
+        Word('Emmanuel','Germany')
+    </script>
+</body>
+</html>

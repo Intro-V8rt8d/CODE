@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        const fruits = ["Apple", "Watermelon", "Orange", "Pineapple", "Pawpaw"]
+        console.log(fruits[0]);
+
+        //Changing Watermelon to Grape
+        fruits[1] = "Grape"
+        console.log(fruits[1]);
+
+        //Adding a new item
+        fruits.push("Watermelon")
+        fruits[fruits.length] = "Pear"
+        console.log(fruits)
+
+        const Names = new Array("Emmanuel", "Darasimi", "Adewumi")
+        console.log(Names)
+
+        //Array Object
+        const Objects = {Name:"John", Age:30, Cars:[
+            {Name:"Ford", Model:["Mustang", "Focus"]}, 
+            {Name:"Toyota", Model:["Camry", "Corolla"]}
+        ]};
+        console.log(Objects.Cars[0]['Name'])
+        console.log(Objects.Cars[0].Model)
+
+        let cars = ''
+        for (let car in Objects.Cars[0].Model){
+            cars = cars + Objects.Cars[0].Model[car] + ' '
+        }
+        console.log(cars)
+
+        Objects.Cars[0].Model.forEach(car =>{
+            console.log(car)
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+{
+  "users": [
+    {
+      "id": "635b",
+      "FirstName": "Emmanuel",
+      "LastName": "Adewumi",
+      "Email": "adewumie000@gmail.com",
+      "Password": "Thirty30"
+    },
+    {
+      "id": "2f89",
+      "FirstName": "Emmanuel",
+      "LastName": "Adewumi",
+      "Email": "adewumie000@gmail.com",
+      "Password": "Three30"
+    },
+    {
+      "id": "45bc",
+      "FirstName": "Emmanuel",
+      "LastName": "Adewumi",
+      "Email": "adewumie000@gmail.com",
+      "ashPassword": "075f1d60e649f145c45f5753653ff2f8c06dcc36980145833ed06ac02e3b7b14"
+    },
+    {
+      "id": "5226",
+      "FirstName": "Emmanuel",
+      "LastName": "Adewumi",
+      "Email": "adewumie000@gmail.com",
+      "ashPassword": "075f1d60e649f145c45f5753653ff2f8c06dcc36980145833ed06ac02e3b7b14"
+    },
+    {
+      "id": "9806",
+      "FirstName": "Emmanuel",
+      "LastName": "Adewumi",
+      "Email": "adewumie000@gmail.com",
+      "ashPassword": "075f1d60e649f145c45f5753653ff2f8c06dcc36980145833ed06ac02e3b7b14"
+    },
+    {
+      "id": "7dcd",
+      "FirstName": "Emmanuel",
+      "LastName": "Adewumi",
+      "Email": "adewumie000@gmail.com",
+      "ashPassword": "3d6caecbee1190af61bbe0261fd5306fd4368ae6da3add2e484150791f715a65"
+    }
+  ],
+  "token": []
+}

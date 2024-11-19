@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+        class House {
+            //Creating members or properties of the class
+            Bedroom = 2;
+            Parlour = 2;
+            Dining = 1;
+            Kitchen = 1;
+            Library = 1;
+
+            displayDetails(){
+                console.log(`number of bedroom: ${this.Bedroom}, number of Parlour: ${this.Parlour}, number of Dining: ${this.Dining}, number of kitchen: ${this.kitchen}, number of library: ${this.library}`)
+            }
+        }
+        const House1 = new House()
+        House1.Bedroom = 5;
+        House1.Parlour = 4;
+        House1.displayDetails()
+        //console.log(House1.Bedroom, House1.Parlour, House1.Library)
+
+        const House2 = new House()
+        House2.Bedroom = 3
+        House2.Kitchen = 2
+        House2.displayDetails()
+        //console.log(House2.Bedroom, House2.Kitchen)
+
+        const House3 = new House()
+        House3.displayDetails()
+        //console.log(House3.Bedroom, House3.Parlour, House3.Dining, House3.Kitchen, House3.Library)
+
+        class Person {
+            //Using constructor to create the properties
+            constructor(name,age){
+                this.names = name
+                this.ages = age
+            }
+            //Method
+            PersonDetails(){
+                console.log(`my name is: ${this.names} and my age is: ${this.ages}`)
+            }
+        }
+         const Person1 = new Person("Emmanuel",30)
+         Person1.PersonDetails()
+         //console.log(Person1.names)
+         
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+*{
+    margin: 0;
+}
+body{
+    background-image: url('abstract.jpg');
+    backdrop-filter: blur(15px);
+}
+ul{
+    list-style: none;
+}
+.contdiv{
+    padding-top: 70px;
+    padding-bottom: 70px;
+    background-color: rgba(14, 14, 14, 0.533);
+}
+.task-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #DDD;
+    border-radius: 4px ;
+    margin-bottom: 10px;
+}
+.task-item.completed{
+    text-decoration: line-through;
+    color: #777;
+}
+.task-buttons button{
+    background-color: #000;
+    border: none;
+    color: white;
+    padding: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 5px;
+}
