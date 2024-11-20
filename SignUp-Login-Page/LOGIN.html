@@ -79,6 +79,42 @@
         }, 2000);
       }
 
+      async function login(){
+        let Email, Password;
+        Email = document.getElementById('Email').value;
+        Password = document.getElementById('Password').value;
+        const ashPassword = await hashPassword(Password);
+
+        //Fetching all the usetrs from the url
+        const response = await fetch('http://localhost:3000/users')
+        if (response.ok){
+          const data = await response.json()
+          const user = data.find(person => person.Email == Email && person.Password == Password)
+
+          if (user) {
+            alert('login successful')
+          }else{
+            alert('invalid info')
+          }
+        }else{
+          alert('Something happened, an error occured somewhere')
+        }
+      }
+
+      async function hashPassword(password) {
+  const encoder = new TextEncoder(); // Encode string as bytes
+  const data = encoder.encode(password); // Convert password string to bytes
+
+  // Use the SubtleCrypto API to hash the password
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data); // Hash using SHA-256
+
+  // Convert hash buffer to a hexadecimal string
+  const hashArray = Array.from(new Uint8Array(hashBuffer)); // Convert buffer to byte array
+  const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+
+  return hashHex; // Return the hexadecimal hash string
+}
+
       function generateToken(){
         const token = new Uint8Array(16)
         window.crypto.getRandomValues(token)
