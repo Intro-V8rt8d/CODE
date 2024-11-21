@@ -137,7 +137,7 @@ async function hashPassword(password) {
   }
 
 
-   HTTP REQUEST PUT METHOD
+   //HTTP REQUEST PUT METHOD
     const response = await fetch("http://localhost:3000/users/1");
 if (response.ok) {
   const user = await response.json();
@@ -166,7 +166,7 @@ if (response.ok) {
 
 
 
-TRY AND CATCH 
+//TRY AND CATCH 
  async function deleteUser(userId) {
   try {
     const response = await fetch(`http://localhost:3000/users/${userId}`, {
