@@ -39,7 +39,7 @@
                         </div>
                       </div>
                       <p id="error" class="text-danger" style="display: none;"></p>
-                      <a href="#" class="btn btn-light" onclick="validation()" id=""Login>LOGIN</a>
+                      <a href="#" class="btn btn-light" onclick="validation()" id="Login">LOGIN</a>
                 </div>
             </div>
 
@@ -54,24 +54,24 @@
         error = document.getElementById('error');
 
         //Retrieving the stored user information
-        const StoredEmail = localStorage.getItem("Email") 
-        const StoredPassword = localStorage.getItem("Pword") 
+        // const StoredEmail = localStorage.getItem("Email") 
+        // const StoredPassword = localStorage.getItem("Pword") 
 
 
         if (Email === "" || Password === "") {
           error.style.display = "block";
           error.innerHTML = '<i class="bi bi-exclamation-circle"></i> Username or password cannot be empty!';
         }
-        else if(Email == StoredEmail && Password == StoredPassword) {
-          const token = generateToken()
-          localStorage.setItem("token", token)
-          console.log(token)
-          alert("Login Successful")
-          location = 'Membership.html';
-        }
+        // else if(Email == StoredEmail && Password == StoredPassword) {
+        //   const token = generateToken()
+        //   localStorage.setItem("token", token)
+        //   console.log(token)
+        //   alert("Login Successful")
+        //   location = 'Membership.html';
+        // }
         else{
           error.style.display = "none";
-          alert ('Invalid Email or Password')
+          login(Email,Password)
         }
 
         setTimeout(() => {
@@ -89,10 +89,18 @@
         const response = await fetch('http://localhost:3000/users')
         if (response.ok){
           const data = await response.json()
-          const user = data.find(person => person.Email == Email && person.Password == Password)
+          const user = data.find(person => person.Email == Email && person.ashPassword === ashPassword)
 
           if (user) {
-            alert('login successful')
+            const token = generateToken()
+            localStorage.setItem("token", token)
+
+            // Store user information securely
+            localStorage.setItem("user", JSON.stringify(user));
+
+            console.log(token)
+            alert("Login Successful")
+            location = 'mem.html';
           }else{
             alert('invalid info')
           }
@@ -120,6 +128,7 @@
         window.crypto.getRandomValues(token)
         return Array.from(token, byte => byte.toString(16).padStart(2,"0")).join("");
       }
+
     </script>
 </body>
 </html>

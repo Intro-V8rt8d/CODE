@@ -1,48 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>Membership Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div>
-        <div>
-            <span>FirstName:</span>
-            <span id="Fname"></span>
-        </div>
-        <div>
-            <span>LastName:</span>
-            <span id="Lname"></span>
-        </div>
-        <div>
-            <span>Email:</span>
-            <span id="Email"></span>
-        </div>
+    <div class="container mt-5">
+        <h1 id="welcomeMessage" class="text-primary"></h1>
+        <p id="emailDisplay" class="text-secondary"></p>
+        <button class="btn btn-danger" onclick="logout()">Logout</button>
+    </div>
 
-        <a onclick="Logout()" class="btn btn-dark">LogOut</a>
-        </div>
+  <script>
+    const welcome = document.getElementById("welcomeMessage")
+    const Email = document.getElementById("emailDisplay")
+    // Retrieve the user info from localStorage
+    const user = JSON.parse(localStorage.getItem("user"));
 
-        <script>
-            const token = localStorage.getItem("token")
-            if (!token){
-                location = "LOGIN.html"
-            }
-            else{
-            var firstname = localStorage.getItem("FName")
-            var lastname = localStorage.getItem("LName")
-            var Email = localStorage.getItem("Email")
+    if (user) {
+      // Display user information dynamically
+      welcome.textContent = `Welcome, ${user.FirstName} ${user.LastName}!`
+      Email.textContent = `Email: ${user.Email}`
+    } else {
+      // Redirect back to login if no user info is found
+      alert("Please log in first.");
+      location = "LOGIN.html";
+    }
 
-            document.getElementById('Fname').innerHTML = firstname
-            document.getElementById('Lname').innerHTML = lastname
-            document.getElementById('Email').innerHTML = Email
-            }
-
-            function Logout(){
-                localStorage.removeItem("token")
-                alert("Logout Successful")
-                location = "LOGIN.html"
-            }
-        </script>
+    function logout() {
+      // Clear user data and token, redirect to login page
+    //   localStorage.removeItem("user");
+    //   localStorage.removeItem("token");
+      location = "LOGIN.html";
+    }
+  </script>
 </body>
 </html>
