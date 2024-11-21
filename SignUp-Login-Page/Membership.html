@@ -18,23 +18,37 @@
   <script>
     const welcome = document.getElementById("welcomeMessage")
     const Email = document.getElementById("emailDisplay")
-    // Retrieve the user info from localStorage
-    const user = JSON.parse(localStorage.getItem("user"));
 
-    if (user) {
-      // Display user information dynamically
-      welcome.textContent = `Welcome, ${user.FirstName} ${user.LastName}!`
-      Email.textContent = `Email: ${user.Email}`
-    } else {
-      // Redirect back to login if no user info is found
-      alert("Please log in first.");
-      location = "LOGIN.html";
+    async function UserInfo() {
+
+      const email = localStorage.getItem('email'); // Get the email from localStorage
+    if (!email) {
+      alert('No user logged in. Redirecting to login page.');
+      location = 'LOGIN.html'; // Redirect back if no email is found
+      return;
     }
 
+    const response = await fetch(`http://localhost:3000/users`);
+    if (response.ok) {
+      const data = await response.json();
+      const user = data.find(person => person.Email == email);
+
+      if (user) {
+        // Display user information dynamically
+        welcome.textContent = `Welcome, ${user.FirstName} ${user.LastName}!`;
+        Email.textContent = `Email: ${user.Email}`;
+      } else {
+        alert('User not found. Redirecting to login.');
+        location = 'LOGIN.html';
+      }
+    } else {
+      alert('Failed to fetch user information.');
+    }
+  }
+
+  UserInfo();
+
     function logout() {
-      // Clear user data and token, redirect to login page
-    //   localStorage.removeItem("user");
-    //   localStorage.removeItem("token");
       location = "LOGIN.html";
     }
   </script>

@@ -48,6 +48,13 @@
       "LastName": "Nuel",
       "Email": "adewumie000@gmail.com",
       "ashPassword": "e0a56b22a96ebad73c8509e889b229af00c51559cadb999525de14ce30c75372"
+    },
+    {
+      "id": "a95d",
+      "FirstName": "John",
+      "LastName": "Doe",
+      "Email": "addyemmy06@gmail.com",
+      "ashPassword": "6f5d0488d0652de52456973dc6625870be7edd71d599bee76fe602de919a6381"
     }
   ],
   "token": []

@@ -61,15 +61,7 @@
         if (Email === "" || Password === "") {
           error.style.display = "block";
           error.innerHTML = '<i class="bi bi-exclamation-circle"></i> Username or password cannot be empty!';
-        }
-        // else if(Email == StoredEmail && Password == StoredPassword) {
-        //   const token = generateToken()
-        //   localStorage.setItem("token", token)
-        //   console.log(token)
-        //   alert("Login Successful")
-        //   location = 'Membership.html';
-        // }
-        else{
+        }else{
           error.style.display = "none";
           login(Email,Password)
         }
@@ -95,12 +87,12 @@
             const token = generateToken()
             localStorage.setItem("token", token)
 
-            // Store user information securely
-            localStorage.setItem("user", JSON.stringify(user));
+            // Store the email in localStorage
+            localStorage.setItem('email', Email);
 
             console.log(token)
             alert("Login Successful")
-            location = 'mem.html';
+            location = 'Membership.html';
           }else{
             alert('invalid info')
           }
@@ -110,18 +102,18 @@
       }
 
       async function hashPassword(password) {
-  const encoder = new TextEncoder(); // Encode string as bytes
-  const data = encoder.encode(password); // Convert password string to bytes
+        const encoder = new TextEncoder(); // Encode string as bytes
+        const data = encoder.encode(password); // Convert password string to bytes
 
-  // Use the SubtleCrypto API to hash the password
-  const hashBuffer = await crypto.subtle.digest('SHA-256', data); // Hash using SHA-256
+        // Use the SubtleCrypto API to hash the password
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data); // Hash using SHA-256
 
-  // Convert hash buffer to a hexadecimal string
-  const hashArray = Array.from(new Uint8Array(hashBuffer)); // Convert buffer to byte array
-  const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+        // Convert hash buffer to a hexadecimal string
+        const hashArray = Array.from(new Uint8Array(hashBuffer)); // Convert buffer to byte array
+        const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
 
-  return hashHex; // Return the hexadecimal hash string
-}
+        return hashHex; // Return the hexadecimal hash string
+      }
 
       function generateToken(){
         const token = new Uint8Array(16)
