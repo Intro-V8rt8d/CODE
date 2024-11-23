@@ -33,11 +33,18 @@
           <input type="text" id="Email" class="form-control">
         </div>
       </div>
+
+      <div class="col-12 col-md-8">
+        <div class="input-group input-group-md">
+          <input type="hidden" id="ID" class="form-control">
+        </div>
+      </div>
     </form>
 
     <div class="d-flex justify-content-between mt-3">
-      <button class="btn btn-primary" onclick="Update()">Update</button>
-      <button class="btn btn-danger" onclick="logout()">Logout</button>
+      <button class="btn btn-success" onclick="Update()">Update</button>
+      <button class="btn btn-danger" onclick="Delete()">Delete</button>
+      <button class="btn btn-primary" onclick="logout()">Logout</button>
     </div>
   </div>
 
@@ -64,6 +71,7 @@
         document.getElementById("firstName").value = user.FirstName
         document.getElementById("LastName").value = user.LastName
         document.getElementById("Email").value = user.Email
+        document.getElementById('ID').value = user.id
       } else {
         alert('User not found. Redirecting to login.');
         location = 'LOGIN.html';
@@ -73,7 +81,50 @@
     }
   }
 
+  async function Update(){
+
+const Fname = document.getElementById("firstName").value;
+const Lname = document.getElementById("LastName").value;
+const id = document.getElementById('ID').value;
+
+const userInfo = {
+FirstName: Fname,
+LastName: Lname
+};
+
+const response = await fetch(`http://localhost:3000/users/${id}`,{
+  method:'PATCH',
+  headers:{'content-Type':'application/json'},
+  body:JSON.stringify(userInfo)
+})
+
+if (response.ok) {
+      alert('Update Successful')
+      console.log('Update Successful')
+    }
+    else{
+      alert('Update Failed')
+      console.log('Update Failed')
+    }
+}
+
+async function Delete(){
+  const id = document.getElementById('ID').value;
+  const response = await fetch(`http://localhost:3000/users/${id}`,{
+    method: 'DELETE'
+  })
+  if (response.ok) {
+      alert('Account Deleted Successfully')
+      location = "LOGIN.html"
+      console.log('Update Successful')
+    }
+    else{
+      alert('Delete Failed')
+      console.log('Update Failed')
+    }
+}
   UserInfo();
+
 
     function logout() {
       location = "LOGIN.html";
