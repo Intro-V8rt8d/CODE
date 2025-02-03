@@ -1,0 +1,38 @@
+*{
+    margin: 0;
+}
+.form-floating>.form-control, .form-floating>.form-control-plaintext, .form-floating>.form-select{
+    height: 42px;
+    min-height: 0;
+    line-height: 1.25;
+}
+.form-floating>label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    height: 70%;
+    padding: 10px;
+    overflow: hidden;
+    text-align: start;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    pointer-events: none;
+    border: var(--bs-border-width) solid transparent;
+    transform-origin: 0 0;
+    transition: opacity .1s ease-in-out, transform .1s ease-in-out;
+}
+
+.mid{
+    padding: 20% 0;
+}
+.midd{
+    padding: 15% 0;
+}
+
+
+@media (max-width:768px){
+    .mid{
+        padding: 45% 0;
+    }
+}

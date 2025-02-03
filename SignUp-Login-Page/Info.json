@@ -41,6 +41,27 @@
       "LastName": "Nuel",
       "Email": "adewumie000@gmail.com",
       "ashPassword": "e0a56b22a96ebad73c8509e889b229af00c51559cadb999525de14ce30c75372"
+    },
+    {
+      "id": "af7c",
+      "FirstName": "Debbie",
+      "LastName": "Adewumi",
+      "Email": "adewumideborah01@gmail.com",
+      "ashPassword": "91aabd8b9bea4cd41460f6e9781946a45a3c86ff9d3d70efebf7b484b0e43a4e"
+    },
+    {
+      "id": "3582",
+      "FirstName": "Ajoboloto",
+      "LastName": "Mumu",
+      "Email": "mumuman123@gmail.com",
+      "ashPassword": "8bb0cf6eb9b17d0f7d22b456f121257dc1254e1f01665370476383ea776df414"
+    },
+    {
+      "id": "1a44",
+      "FirstName": "Olatobosun",
+      "LastName": "Avatar",
+      "Email": "avato123@gmail.com",
+      "ashPassword": "8bb0cf6eb9b17d0f7d22b456f121257dc1254e1f01665370476383ea776df414"
     }
   ],
   "token": []
