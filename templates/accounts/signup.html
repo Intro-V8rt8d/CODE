@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Sign up | VirtClass{% endblock %}
+{% block content %}
+  <div class="card" style="max-width:700px;margin:auto">
+    <h2>Create your account</h2>
+    <form method="post">
+      {% csrf_token %}
+      <div class="row">
+        <div style="flex:1 1 240px">
+          <label>Full name</label>
+          <input class="input" name="full_name" placeholder="enter your full name" required>
+        </div>
+        <div style="flex:1 1 240px">
+          <label>Username</label>
+          <input class="input" name="username" placeholder="enter a Username" required>
+        </div>
+      </div>
+      <div class="row" style="margin-top:10px">
+        <div style="flex:1 1 240px">
+          <label>Email</label>
+          <input class="input" name="email" placeholder="enter your email" type="email">
+        </div>
+        <div style="flex:1 1 240px">
+          <label>Password</label>
+          <input class="input" name="password" placeholder="enter a password" type="password" required>
+        </div>
+        <div style="flex:1 1 240px">
+          <label>Confirm password</label>
+          <input class="input" name="confirm_password" placeholder="confirm your password" type="password" required>
+        </div>
+      </div>
+      <div style="margin-top:10px">
+        <label>Role</label><br>
+        <label><input type="radio" name="role" value="student" checked> Student</label>
+        <label style="margin-left:12px"><input type="radio" name="role" value="tutor"> Tutor</label>
+      </div>
+      <button class="btn" style="margin-top:12px">Sign up</button>
+    </form>
+  </div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Home | VirtClass{% endblock %}
+{% block content %}
+
+  <section class="hero" style="background-image:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop');margin-top:-24px">
+
+    <div class="inner">
+      <h1 style="font-size:46px;margin:0 0 10px">Welcome to VirtClass</h1>
+      <p class="muted" style="font-size:18px;margin:0 0 24px">Learn together from anywhere in the world.</p>
+      <a class="btn" href="{% url 'accounts:login' %}">Get Started</a>
+    </div>
+  </section>
+  <section class="row" style="margin-top:24px">
+    <div class="card" style="flex:1 1 260px">
+      <h3>About us</h3>
+      <p>We connect tutors and students with live classes, assignments and resources.</p>
+    </div>
+    <div class="card" style="flex:1 1 260px">
+      <h3>Services</h3><p>Online videos, Streaming classes, course resources, structured assignments and more.</p>
+    </div>
+    <div class="card" style="flex:1 1 260px">
+      <h3>Contact</h3><p>Reach out anytime: petersegungold@gmail.com</p>
+    </div>
+  </section>
+{% endblock %}

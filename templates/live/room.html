@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% block title %}
+Live Room {{ room }} | VirtClass
+{% endblock %}
+
+{% block content %}
+  <div class="between">
+    <h2>Live Room <span class="pill">{{ room }}</span></h2>
+    {% if session.tutor == request.user %}
+      <a class="btn danger" href="{% url 'live:end' room %}">End live</a>
+    {% endif %}
+  </div>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Video</h3>
+      <video id="local" autoplay playsinline muted style="width:100%;border-radius:12px"></video>
+      <video id="remote" autoplay playsinline style="width:100%;border-radius:12px;margin-top:10px"></video>
+      <div class="between" style="margin-top:10px">
+        <button class="btn outline" id="toggleCam">Toggle Camera</button>
+        <button class="btn outline" id="toggleMic">Toggle Mic</button>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Participants</h3>
+      <div id="log" class="muted" style="min-height:160px"></div>
+      <div class="muted">Viewers: <span id="count">0</span></div>
+    </div>
+  </div>
+
+  <script>
+    const room = "{{ room }}";
+    const ws = new WebSocket(
+      (location.protocol === 'https:' ? 'wss' : 'ws') + '://' + location.host + '/ws/live/' + room + '/'
+    );
+
+    // log helper
+    const log = (m) => {
+      const el = document.createElement('div');
+      el.textContent = m;
+      document.getElementById('log').prepend(el);
+    };
+
+    ws.onmessage = (e) => {
+      const data = JSON.parse(e.data);
+      if (data.type === 'presence') {
+        if (data.event === 'join') log(data.full_name + ' has just joined the live');
+        if (data.event === 'leave') log(data.full_name + ' just left the class');
+        if (data.event === 'kicked' && data.user_id === {{ request.user.id|default:"null" }}) {
+          alert('You were removed from the live');
+          location.href = '{% url "live:start" %}';
+        }
+      } else if (data.type === 'count') {
+        document.getElementById('count').textContent = data.count;
+      } else if (data.type === 'signal') {
+        const payload = data.payload;
+        if (payload.action === 'offer' && !isTutor) {
+          pc.setRemoteDescription(new RTCSessionDescription(payload.sdp));
+          answer();
+        }
+        if (payload.action === 'answer' && isTutor) {
+          pc.setRemoteDescription(new RTCSessionDescription(payload.sdp));
+        }
+        if (payload.action === 'candidate' && payload.candidate) {
+          pc.addIceCandidate(new RTCIceCandidate(payload.candidate));
+        }
+      }
+    };
+
+    // ping every 2s
+    setInterval(() => {
+      if (ws.readyState === 1) {
+        ws.send(JSON.stringify({ action: 'count' }));
+      }
+    }, 2000);
+
+    // ✅ use context-provided boolean
+    const isTutor = {{ is_tutor|yesno:"true,false" }};
+    let localStream = null;
+    let pc = null;
+
+    async function init() {
+      pc = new RTCPeerConnection({
+        iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
+      });
+
+      pc.onicecandidate = (e) => {
+        if (e.candidate) {
+          ws.send(JSON.stringify({ action: 'candidate', candidate: e.candidate }));
+        }
+      };
+
+      pc.ontrack = (e) => {
+        document.getElementById('remote').srcObject = e.streams[0];
+      };
+
+      try {
+        localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        document.getElementById('local').srcObject = localStream;
+        localStream.getTracks().forEach((t) => pc.addTrack(t, localStream));
+      } catch (e) {
+        alert('Media error: ' + e.message);
+      }
+
+      if (isTutor) {
+        offer();
+      }
+    }
+
+    async function offer() {
+      const sdp = await pc.createOffer();
+      await pc.setLocalDescription(sdp);
+      ws.send(JSON.stringify({ action: 'offer', sdp }));
+    }
+
+    async function answer() {
+      const sdp = await pc.createAnswer();
+      await pc.setLocalDescription(sdp);
+      ws.send(JSON.stringify({ action: 'answer', sdp }));
+    }
+
+    init();
+
+    document.getElementById('toggleCam').onclick = () =>
+      localStream.getVideoTracks().forEach((t) => (t.enabled = !t.enabled));
+
+    document.getElementById('toggleMic').onclick = () =>
+      localStream.getAudioTracks().forEach((t) => (t.enabled = !t.enabled));
+  </script>
+{% endblock %}

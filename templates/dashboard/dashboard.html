@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard | VirtClass{% endblock %}
+{% block content %}
+  <div class="between" style="margin-bottom:12px">
+    <h2>Welcome, {{ request.user.profile.full_name }}{% if request.user.profile.role == 'tutor' %} (Tutor){% endif %}</h2>
+    {% if request.user.profile.role == 'tutor' %}
+      <a class="btn" href="{% url 'dashboard:upload' %}">Create / Upload</a>
+    {% endif %}
+  </div>
+  <form method="get" class="between card">
+    {{ form.q }}
+    <button class="btn">Search</button>
+  </form>
+  <div class="grid grid-3" style="margin-top:16px">
+    <div class="card">
+      <h3>Random Posts</h3>
+      <p class="muted">Select a category or search to refine.</p>
+      {% for v in videos|slice:":3" %}
+        <div class="card" style="padding:10px;margin-bottom:10px">
+          <strong>{{ v.title }}</strong>
+          <div class="muted">by {{ v.uploader.username }}</div>
+        </div>
+      {% empty %}<p class="muted">No posts.</p>{% endfor %}
+    </div>
+    <div class="card">
+      <h3>YouTube Videos</h3>
+      {% for v in videos %}
+        <div class="card" style="padding:10px;margin-bottom:10px">
+          <div class="muted" style="font-size:12px">{{ v.created_at|date:"M d, Y" }} · {{ v.category }}</div>
+          <strong>{{ v.title }}</strong>
+          <div class="muted">by {{ v.uploader.username }} · {{ v.views }} views</div>
+          <iframe class="yt-iframe" src="https://www.youtube.com/embed/{{ v.youtube_id }}" allowfullscreen></iframe>
+        </div>
+      {% empty %}
+        <p>No videos yet.</p>
+      {% endfor %}
+    </div>
+    
+    <div class="card">
+      <h3>Documents</h3>
+      {% for d in docs %}
+        <div class="card" style="padding:10px;margin-bottom:10px">
+          <div class="muted" style="font-size:12px">{{ d.created_at|date:"M d, Y" }} · {{ d.category }}</div>
+          <strong>{{ d.title }}</strong>
+          <div class="muted">by {{ d.uploader.username }}</div>
+          <a class="btn outline" href="{% url 'dashboard:download_doc' d.pk %}">Download</a>
+        </div>
+      {% empty %}
+        <p>No documents yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

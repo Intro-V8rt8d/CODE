@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Sign in | VirtClass{% endblock %}
+{% block content %}
+  <div class="hero" style="min-height:60vh;background-image:url('https://images.unsplash.com/photo-1529101091764-c3526daf38fe?q=80&w=1200&auto=format&fit=crop');border-radius:16px;overflow:hidden">
+    <div class="inner">
+      <div class="card" style="max-width:420px;margin:auto;background:rgba(255,255,255,.75)">
+        <div class="center">
+          <div class="logo" style="margin-bottom:6px">Creat<span class="accent">ive</span></div>
+          <h5 class="muted" style="margin:0 0 10px">Welcome back</h5>
+        </div>
+        <form method="post">
+          {% csrf_token %}
+          <label>Username or Email</label>
+          <input class="input" type="text" name="username_or_email" required>
+          <label>Password</label>
+          <input class="input" type="password" name="password" required>
+          <button class="btn" style="width:100%;margin-top:10px">Sign in</button>
+        </form>
+        <h5 class="center" style="margin-top:12px"><a href="{% url 'accounts:signup' %}">Create an account</a></h5>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% load static %}
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}VirtClass{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <script defer src="{% static 'js/app.js' %}"></script>
+</head>
+<body>
+  <header class="nav">
+    <div class="container between">
+      <a href="/" class="logo">Creat<span class="accent">ive</span></a>
+      <nav>
+        <ul>
+          {% if user.is_authenticated %}
+            {% if user.profile.role == 'student' %}
+              <li><a href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
+              <li><a href="{% url 'assignments:list' %}">Assignments</a></li>
+              <li><a href="{% url 'dashboard:resources' %}">Resources</a></li>
+              <li><a href="{% url 'live:start' %}">Live</a></li>
+            {% else %}
+              <li><a href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
+              <li><a href="{% url 'dashboard:upload' %}">Upload</a></li>
+              <li><a href="{% url 'live:start' %}">Live</a></li>
+              <li><a href="{% url 'assignments:list' %}">Assignments</a></li>
+            {% endif %}
+            <li>
+              <form action="{% url 'accounts:logout' %}" method="post" style="display:inline">
+                {% csrf_token %}<button class="btn outline" style="padding:6px 10px">Logout</button>
+              </form>
+            </li>
+            <li class="pill">Online <span class="online-dot"></span></li>
+          {% else %}
+            <li><a href="/">Home</a></li>
+            <li><a href="{% url 'dashboard:about' %}">About</a></li>
+            <li><a href="{% url 'dashboard:services' %}">Services</a></li>
+            <li><a href="{% url 'dashboard:contact' %}">Contact</a></li>
+            <li><a class="btn outline" href="{% url 'accounts:login' %}">Login</a></li>
+          {% endif %}
+          <li><button class="btn outline" data-toggle="theme" title="Toggle theme">☀️</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main class="container" style="padding:24px 0px">
+    {% for message in messages %}
+      <div class="card" style="border-left:6px solid {% if message.tags == 'error' %}var(--danger){% else %}var(--accent){% endif %}">{{ message }}</div>
+    {% endfor %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="container center">&copy; <span id="year"></span> VirtClass. All rights reserved.</footer>
+  <script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body>
+</html>

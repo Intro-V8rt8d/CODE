@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Live | VirtClass{% endblock %}
+{% block content %}
+  {% if request.user.profile.role == 'tutor' %}
+    <div class="card center">
+      <h3>Start a live class</h3>
+      <form method="post">{% csrf_token %}<button class="btn">Start live</button></form>
+    </div>
+  {% endif %}
+  <div class="card">
+    <h3>Join live</h3>
+    <form action="{% url 'live:join' %}" method="get" class="between">
+      <input class="input" name="room" placeholder="Enter room code">
+      <button class="btn">Join live</button>
+    </form>
+  </div>
+{% endblock %}

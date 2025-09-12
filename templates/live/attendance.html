@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Attendance | VirtClass{% endblock %}
+{% block content %}
+  <div class="card">
+    <h3>Attendance for {{ session.room }}</h3>
+    <table class="table">
+      <tr><th>Student</th><th>Joined</th><th>Left</th><th>Status</th></tr>
+      {% for p in parts %}
+        <tr>
+          <td>{{ p.user.profile.full_name }}</td>
+          <td>{{ p.joined_at|date:"M d, Y H:i" }}</td>
+          <td>{% if p.left_at %}{{ p.left_at|date:"M d, Y H:i" }}{% else %}-{% endif %}</td>
+          <td>{% if p.kicked %}Kicked{% else %}{% if p.left_at %}Left{% else %}Online{% endif %}{% endif %}</td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="4">No participants yet.</td></tr>
+      {% endfor %}
+    </table>
+  </div>
+{% endblock %}

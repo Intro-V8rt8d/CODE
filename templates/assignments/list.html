@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Assignments | VirtClass{% endblock %}
+{% block content %}
+  <div class="between">
+    <h2>Assignments</h2>
+    {% if request.user.profile.role == 'tutor' %}<a class="btn" href="{% url 'assignments:create' %}">Create assignment</a>{% endif %}
+  </div>
+  <form class="card" method="get">
+    <label>Search by secret code</label>
+    <input class="input" name="code" placeholder="Enter code e.g. ABC123">
+    <button class="btn" style="margin-top:10px">Find</button>
+  </form>
+  {% if found %}
+    <div class="card">
+      <h3>{{ found.title }} <span class="pill">{{ found.code }}</span></h3>
+      <a class="btn outline" href="{% url 'assignments:detail' found.code %}">Open</a>
+    </div>
+  {% endif %}
+  {% if owned %}
+    <div class="card" style="margin-top:16px">
+      <h3>Your created assignments</h3>
+      <ul>
+        {% for a in owned %}
+          <li><a href="{% url 'assignments:detail' a.code %}">{{ a.title }}</a> <span class="pill">{{ a.code }}</span></li>
+        {% empty %}<li>None yet.</li>{% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+{% endblock %}

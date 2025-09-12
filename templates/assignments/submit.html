@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Submit Assignment | VirtClass{% endblock %}
+{% block content %}
+  <div class="card">
+    <h3>Submit your file for {{ a.title }}</h3>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input class="input" type="file" name="answer_file" required>
+      <button class="btn" style="margin-top:10px">Upload</button>
+    </form>
+  </div>
+{% endblock %}

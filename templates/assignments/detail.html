@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Assignment {{ a.code }} | VirtClass{% endblock %}
+{% block content %}
+  <div class="card">
+    <h2>{{ a.title }} <span class="pill">{{ a.code }}</span></h2>
+    {% if a.deadline %}<div class="muted">Deadline: {{ a.deadline|date:"M d, Y H:i" }}</div>{% endif %}
+    {% if a.question_text %}<p>{{ a.question_text }}</p>{% endif %}
+    {% if a.question_file %}<a class="btn outline" href="{{ a.question_file.url }}">Download question</a>{% endif %}
+    <hr>
+    <h3>Objective Questions</h3>
+    {% if a.questions.all %}
+      <form method="post" action="{% url 'assignments:answer_objective' a.code %}">
+        {% csrf_token %}
+        {% for q in a.questions.all %}
+          <div style="margin-bottom:10px">
+            <strong>{{ forloop.counter }}. {{ q.text }}</strong><br>
+            {% for opt in q.options.all %}
+              <label><input type="radio" name="q{{ q.id }}" value="{{ opt.id }}"> {{ opt.text }}</label><br>
+            {% endfor %}
+          </div>
+        {% endfor %}
+        <button class="btn">Submit answers</button>
+      </form>
+    {% else %}<p class="muted">No objective questions.</p>{% endif %}
+    <hr>
+    {% if a.submit_here %}
+      {% if sub and sub.answer_file %}
+        <p>You submitted a file on {{ sub.submitted_at|date:"M d, Y H:i" }}{% if sub.score %}. Score: {{ sub.score }}{% endif %}</p>
+      {% else %}
+        <a class="btn" href="{% url 'assignments:submit' a.code %}">Submit file</a>
+      {% endif %}
+    {% else %}
+      <p class="muted">This assignment is not to be submitted here.</p>
+    {% endif %}
+    {% if request.user == a.creator %}
+      <p class="muted">Share this secret code with your students: <strong>{{ a.code }}</strong></p>
+      <a class="btn outline" href="{% url 'assignments:add_objective' a.code %}">Add objective</a>
+    {% endif %}
+  </div>
+{% endblock %}
